@@ -25,10 +25,16 @@
   <!-- Emoji 網站小圖示 (Favicon) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>" />
 
-  <!-- Google Fonts：書卷文青字體組合 (Noto Serif TC + Noto Sans TC) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
+  <!-- 自訂本機字體宣告 (將字體檔命名為 custom-font.ttf 並放於與 index.html 同層目錄) -->
+  <style>
+    @font-face {
+      font-family: 'MyCustomFont';
+      src: url('./custom-font.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -38,8 +44,8 @@
       theme: {
         extend: {
           fontFamily: {
-            serif: ['"Noto Serif TC"', 'Georgia', 'serif'],
-            sans: ['"Noto Sans TC"', 'system-ui', 'sans-serif'],
+            serif: ['"MyCustomFont"', '"Noto Serif TC"', 'Georgia', 'serif'],
+            sans: ['"MyCustomFont"', '"Noto Sans TC"', 'system-ui', 'sans-serif'],
           },
           colors: {
             brand: {
