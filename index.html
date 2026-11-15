@@ -1,1 +1,626 @@
-今天日期是115/11/15
+<!-- 檔名：index.html -->
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Google Search Console 驗證標記（待補上，請將您的驗證 meta 標籤貼於此處） -->
+  <!-- <meta name="google-site-verification" content="您的驗證碼" /> -->
+
+  <!-- 基本 SEO 設定 -->
+  <title>Harley｜諮商實習心理師</title>
+  <meta name="description" content="Harley Gao 的個人網站，存在主義取向心理治療，實習諮商心理師。以溫暖同理、務實行動與深度思辨，陪伴你在生命與哲學的脈絡中探索自我與意義。" />
+  <meta name="keywords" content="諮商, 意義, 生命, 哲學, 心理師, Harley, 存在主義取向治療, 自我探索, LGBTQ+友善" />
+  <meta name="author" content="Harley Gao" />
+
+  <!-- Canonical 與 Open Graph 社群分享標籤（網址待補上後可替換為您的 GitHub Pages 網址） -->
+  <link rel="canonical" href="https://example.github.io/" />
+  <meta property="og:title" content="Harley｜諮商實習心理師" />
+  <meta property="og:description" content="Harley Gao 的個人網站，存在主義取向心理治療，實習諮商心理師" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.github.io/" />
+  <meta property="og:image" content="https://picsum.photos/seed/harley-counseling-hero/1200/630" />
+
+  <!-- Emoji 網站小圖示 (Favicon) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>" />
+
+  <!-- Google Fonts：書卷文青字體組合 (Noto Serif TC + Noto Sans TC) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Noto Serif TC"', 'Georgia', 'serif'],
+            sans: ['"Noto Sans TC"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              navy: '#1E3A5F',      /* 深藍主色 */
+              navyDark: '#13263E',  /* 更深藍 */
+              navyLight: '#2E5283', /* 淺一階深藍 */
+              warmBg: '#FAF8F5',    /* 溫潤米白底色 */
+              warmCard: '#F2EFE9',  /* 溫暖淺卡色 */
+              accent: '#C87D55',    /* 溫暖陶土橘點綴 */
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- JSON-LD Person 結構化資料 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Harley Gao",
+    "alternateName": "Harley",
+    "jobTitle": "實習諮商心理師",
+    "description": "Harley Gao 的個人網站，存在主義取向心理治療，實習諮商心理師",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "新竹市",
+      "addressCountry": "TW"
+    },
+    "knowsAbout": [
+      "存在主義取向治療",
+      "自我探索",
+      "情感議題",
+      "LGBTQ+友善",
+      "同志身份認同",
+      "哲學思辨"
+    ]
+  }
+  </script>
+
+  <style>
+    /* 柔和漸層背景質感 */
+    .bg-literary-gradient {
+      background: linear-gradient(135deg, #FAF8F5 0%, #F0F4F8 50%, #F7F3EB 100%);
+    }
+    .dark .bg-literary-gradient {
+      background: linear-gradient(135deg, #0F172A 0%, #16243B 50%, #111827 100%);
+    }
+    
+    /* 確保全站基礎字體大小不小於 16px，符合閱讀舒適度與 RWD 規範 */
+    html {
+      font-size: 16px;
+    }
+    body {
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+<body class="font-sans text-slate-800 dark:text-slate-100 bg-literary-gradient antialiased selection:bg-brand-navy selection:text-white transition-colors duration-300">
+
+  <!-- 互動功能 1：閱讀進度條 -->
+  <div class="fixed top-0 left-0 w-full h-1.5 z-50 bg-slate-200/50 dark:bg-slate-800/50">
+    <div id="reading-progress" class="h-full bg-brand-navy dark:bg-sky-400 transition-all duration-150" style="width: 0%;"></div>
+  </div>
+
+  <!-- 導覽列 -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-white/85 dark:bg-slate-900/85 border-b border-slate-200/70 dark:border-slate-800 transition-colors duration-300">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- 網站名稱 / 文字頭像 -->
+        <a href="#" class="flex items-center gap-3 group">
+          <span class="w-9 h-9 rounded-full bg-brand-navy dark:bg-sky-600 text-white font-serif font-bold flex items-center justify-center text-lg shadow-sm group-hover:scale-105 transition-transform">
+            H
+          </span>
+          <span class="font-serif font-bold text-xl tracking-wide text-brand-navy dark:text-white">
+            Harley Gao
+          </span>
+        </a>
+
+        <!-- 電腦版選單與深淺色切換 -->
+        <nav class="hidden md:flex items-center gap-7" aria-label="主導覽列">
+          <a href="#about" class="text-base font-medium text-slate-700 dark:text-slate-300 hover:text-brand-navy dark:hover:text-sky-300 transition-colors">關於我</a>
+          <a href="#skills" class="text-base font-medium text-slate-700 dark:text-slate-300 hover:text-brand-navy dark:hover:text-sky-300 transition-colors">專長技能</a>
+          <a href="#learning" class="text-base font-medium text-slate-700 dark:text-slate-300 hover:text-brand-navy dark:hover:text-sky-300 transition-colors">正在學習</a>
+          <a href="#contact" class="text-base font-medium text-slate-700 dark:text-slate-300 hover:text-brand-navy dark:hover:text-sky-300 transition-colors">聯絡方式</a>
+          
+          <!-- 互動功能 2：深淺色切換按鈕 -->
+          <button id="theme-toggle-desktop" type="button" aria-label="切換深淺色模式" class="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-brand-navy dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+            <!-- 太陽圖示 (深色模式時顯示) -->
+            <svg id="sun-icon-desktop" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <!-- 月亮圖示 (淺色模式時顯示) -->
+            <svg id="moon-icon-desktop" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </button>
+        </nav>
+
+        <!-- 手機版控制項：深淺色切換 + 漢堡選單 -->
+        <div class="flex items-center gap-2 md:hidden">
+          <button id="theme-toggle-mobile" type="button" aria-label="切換深淺色模式" class="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-brand-navy dark:text-amber-300">
+            <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+            </svg>
+          </button>
+          
+          <button id="mobile-menu-btn" type="button" aria-label="開啟選單" aria-expanded="false" class="p-2.5 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 手機版展開選單 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-5 space-y-2">
+      <a href="#about" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">關於我</a>
+      <a href="#skills" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">專長技能</a>
+      <a href="#learning" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">正在學習</a>
+      <a href="#contact" class="mobile-nav-link block px-3 py-3 rounded-lg text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800">聯絡方式</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 開場區 (Hero Section) - 滿版柔和深藍漸層與背景圖 -->
+    <section class="relative overflow-hidden py-16 sm:py-24 lg:py-28 border-b border-slate-200/60 dark:border-slate-800">
+      <!-- 開場背景圖 (使用暫代圖，並設定低透明度營造文青深藍氛圍) -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="https://picsum.photos/seed/harley-calm-desk/1600/900" 
+          alt="溫暖寧靜的書桌與光影背景" 
+          loading="lazy"
+          onerror="this.onerror=null; this.src='https://picsum.photos/seed/warm-books/1600/900';"
+          class="w-full h-full object-cover opacity-15 dark:opacity-10"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-white/70 via-brand-warmBg/80 to-brand-warmBg dark:from-slate-900/80 dark:via-slate-900/90 dark:to-slate-900"></div>
+      </div>
+
+      <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center gap-10 md:gap-12">
+          
+          <!-- 左側/上方：質感文字頭像 H -->
+          <div class="flex-shrink-0">
+            <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-gradient-to-br from-brand-navy to-brand-navyLight dark:from-sky-800 dark:to-brand-navy text-white flex flex-col items-center justify-center shadow-xl ring-4 ring-white/80 dark:ring-slate-800">
+              <span class="font-serif text-6xl sm:text-7xl font-bold tracking-tight">H</span>
+              <span class="text-xs tracking-widest uppercase mt-1 text-sky-200">Harley</span>
+            </div>
+          </div>
+
+          <!-- 右側/下方：大標語、名字、身分與介紹 -->
+          <div class="text-center md:text-left flex-1">
+            <div class="inline-flex flex-wrap items-center justify-center md:justify-start gap-2 mb-4">
+              <span class="px-3.5 py-1 rounded-full text-base font-medium bg-brand-navy/10 text-brand-navy dark:bg-sky-900/50 dark:text-sky-200">
+                實習諮商心理師
+              </span>
+              <span class="px-3.5 py-1 rounded-full text-base font-medium bg-amber-900/10 text-amber-900 dark:bg-amber-900/30 dark:text-amber-200">
+                📍 新竹市｜服務範圍：全台灣
+              </span>
+            </div>
+
+            <!-- 全站唯一 H1 -->
+            <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-navy dark:text-white tracking-tight mb-3">
+              Harley Gao
+            </h1>
+
+            <!-- 主標語 -->
+            <p class="font-serif text-2xl sm:text-3xl font-semibold text-brand-accent dark:text-amber-300 mb-5 leading-snug">
+              「活著回來就行，你真棒！」
+            </p>
+
+            <!-- 三個代表關鍵字 -->
+            <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5 mb-6 text-base font-medium text-brand-navy dark:text-sky-300">
+              <span class="bg-white/80 dark:bg-slate-800/80 px-3 py-1 rounded-lg shadow-sm border border-slate-200/60 dark:border-slate-700">🌱 溫暖同理</span>
+              <span class="bg-white/80 dark:bg-slate-800/80 px-3 py-1 rounded-lg shadow-sm border border-slate-200/60 dark:border-slate-700">🧭 務實行動</span>
+              <span class="bg-white/80 dark:bg-slate-800/80 px-3 py-1 rounded-lg shadow-sm border border-slate-200/60 dark:border-slate-700">💡 深度思辨</span>
+            </div>
+
+            <!-- 開場簡介 -->
+            <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed max-w-2xl mb-8">
+              我是諮商心理所研究生，現正進行兼職實習且有團體帶領經驗。習慣透過系統化方法解決問題，兼具敏銳的觀察力與溫暖同理的特質，期許能陪伴他人梳理情緒、探索自我。
+            </p>
+
+            <!-- 主要行動按鈕 -->
+            <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+              <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-brand-navy hover:bg-brand-navyLight dark:bg-sky-600 dark:hover:bg-sky-500 text-white font-medium text-base shadow-md hover:shadow-lg transition-all">
+                <span>✉️ 寫信給我 / 預約服務</span>
+              </a>
+              <a href="#about" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-white dark:bg-slate-800 text-brand-navy dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 font-medium text-base transition-all">
+                <span>認識我的故事 ↓</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 區塊一：關於我 (左右分欄 + 溫潤白底) -->
+    <section id="about" class="py-16 sm:py-24 bg-white/80 dark:bg-slate-900/60">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+          <span class="text-sm font-bold tracking-widest uppercase text-brand-accent dark:text-amber-400 block mb-2">ABOUT ME</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-navy dark:text-white">
+            關於我：從哲學思辨走向助人陪伴
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          <!-- 左側：故事文字 (佔 7 欄) -->
+          <div class="lg:col-span-7 space-y-6 text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+            <p>
+              嗨，我是 <strong class="text-brand-navy dark:text-sky-300 font-semibold">Harley</strong>！目前我正在成為諮商心理師的路上努力：一邊就讀諮商心理學研究所，一邊在諮商所進行兼職實習，最近也正在帶領關於「拖延主題」的團體。
+            </p>
+            <p>
+              回頭看自己的經歷，其實轉了幾個彎。大學時我念的是<strong class="text-brand-navy dark:text-sky-300 font-semibold">哲學系</strong>，同時擔任美語補習班助教；畢業後進到了<strong class="text-brand-navy dark:text-sky-300 font-semibold">人資領域</strong>工作。繞了一圈我才發現，自己一直以來最感興趣的核心始終是「人」。於是，我決定走進諮商所成為實習心理師，希望能用自己的一份力，把這份溫暖、自我覺察與行動策略，帶給同樣在迷惘中尋找方向的人。
+            </p>
+            <p>
+              在做事與思考上，我特別在乎<strong class="text-brand-navy dark:text-sky-300 font-semibold">「邏輯實證」與「實務效能」</strong>。面對理論和研究時，習慣追根究柢、不盲從表面結論，重視背後的哲學脈絡與因果推論；但同時我也非常喜歡嘗試新事物！面對繁瑣的日常任務或資料整理時，我很喜歡透過 AI 學習寫程式、設計自動化流程來解決重複性的問題，把寶貴的時間留給真正重要的思考與休息。
+            </p>
+
+            <!-- 生活中的我 & 小事實卡片 -->
+            <div class="mt-8 p-6 rounded-2xl bg-brand-warmCard dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700 space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="text-2xl" aria-hidden="true">📚</span>
+                <div>
+                  <h3 class="font-serif font-bold text-lg text-brand-navy dark:text-white mb-1">工作與課業以外的我</h3>
+                  <p class="text-base text-slate-700 dark:text-slate-300">喜歡獨處、玩電腦、讀書！享受在安靜的空間裡與自己對話、充電。</p>
+                </div>
+              </div>
+              <hr class="border-slate-200 dark:border-slate-700" />
+              <div class="flex items-start gap-3">
+                <span class="text-2xl" aria-hidden="true">☕</span>
+                <div>
+                  <h3 class="font-serif font-bold text-lg text-brand-navy dark:text-white mb-1">一個你可能不知道的小事實</h3>
+                  <p class="text-base text-slate-700 dark:text-slate-300">比起跟大團朋友出去旅行，我其實更喜歡三五好友聚餐聊天，那樣自在深入的節奏讓我覺得最舒服。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 右側：配圖與核心理念引言 (佔 5 欄) -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-200/80 dark:border-slate-700 bg-white dark:bg-slate-800">
+              <img 
+                src="https://picsum.photos/seed/harley-reading-philosophy/800/900" 
+                alt="閱讀與哲學思辨的日常氛圍" 
+                loading="lazy"
+                onerror="this.onerror=null; this.src='https://picsum.photos/seed/quiet-study/800/900';"
+                class="w-full h-80 sm:h-96 object-cover"
+              />
+              <div class="p-5 bg-brand-navy text-white">
+                <p class="font-serif text-base sm:text-lg italic leading-relaxed">
+                  「在理性的哲學脈絡與感性的情緒陪伴之間，為每一個獨特的生命尋找安放的位置。」
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 區塊間視覺橫幅 (圖片橫幅增加層次感) -->
+    <div class="relative h-48 sm:h-60 w-full overflow-hidden">
+      <img 
+        src="https://picsum.photos/seed/harley-peaceful-nature/1600/500" 
+        alt="柔和光影與自然風景橫幅" 
+        loading="lazy"
+        onerror="this.onerror=null; this.src='https://picsum.photos/seed/calm-horizon/1600/500';"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-brand-navy/65 dark:bg-slate-950/75 flex items-center justify-center px-4 text-center">
+        <p class="font-serif text-xl sm:text-2xl text-white tracking-wide max-w-2xl">
+          每一次的迷惘，都是重新認識自己的起點。
+        </p>
+      </div>
+    </div>
+
+    <!-- 區塊二：專長技能 (卡片格排版 + 柔和漸層背景) -->
+    <section id="skills" class="py-16 sm:py-24">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-sm font-bold tracking-widest uppercase text-brand-accent dark:text-amber-400 block mb-2">EXPERTISE & FOCUS</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-navy dark:text-white mb-4">
+            專長技能與關注議題
+          </h2>
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300">
+            結合存在主義的深度思辨與溫暖接納的態度，陪伴你走過生命中的不同課題。
+          </p>
+        </div>
+
+        <!-- 5 張質感專長卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- 技能 1 -->
+          <div class="bg-white dark:bg-slate-800/90 rounded-2xl p-6 sm:p-7 shadow-sm hover:shadow-md border border-slate-200/80 dark:border-slate-700 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-navy/10 dark:bg-sky-900/50 text-brand-navy dark:text-sky-300 flex items-center justify-center text-2xl mb-5">
+                🌌
+              </div>
+              <h3 class="font-serif text-xl font-bold text-brand-navy dark:text-white mb-3">
+                存在主義取向治療
+              </h3>
+              <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                在面對生命的迷惘、選擇與孤獨時，陪伴你一起思辨並找回屬於自己的意義與力量。
+              </p>
+            </div>
+          </div>
+
+          <!-- 技能 2 -->
+          <div class="bg-white dark:bg-slate-800/90 rounded-2xl p-6 sm:p-7 shadow-sm hover:shadow-md border border-slate-200/80 dark:border-slate-700 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-navy/10 dark:bg-sky-900/50 text-brand-navy dark:text-sky-300 flex items-center justify-center text-2xl mb-5">
+                🧭
+              </div>
+              <h3 class="font-serif text-xl font-bold text-brand-navy dark:text-white mb-3">
+                自我探索
+              </h3>
+              <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                透過溫暖的對話與系統化梳理，陪你看見內在的真實需求，釐清未來的方向。
+              </p>
+            </div>
+          </div>
+
+          <!-- 技能 3 -->
+          <div class="bg-white dark:bg-slate-800/90 rounded-2xl p-6 sm:p-7 shadow-sm hover:shadow-md border border-slate-200/80 dark:border-slate-700 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-navy/10 dark:bg-sky-900/50 text-brand-navy dark:text-sky-300 flex items-center justify-center text-2xl mb-5">
+                💞
+              </div>
+              <h3 class="font-serif text-xl font-bold text-brand-navy dark:text-white mb-3">
+                情感議題
+              </h3>
+              <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                無論是親密關係中的卡關、依附焦慮或分離失落，提供一個安全、不被評價的空間讓你好好安放情緒。
+              </p>
+            </div>
+          </div>
+
+          <!-- 技能 4 -->
+          <div class="bg-white dark:bg-slate-800/90 rounded-2xl p-6 sm:p-7 shadow-sm hover:shadow-md border border-slate-200/80 dark:border-slate-700 transition-all flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-navy/10 dark:bg-sky-900/50 text-brand-navy dark:text-sky-300 flex items-center justify-center text-2xl mb-5">
+                🏳️‍🌈
+              </div>
+              <h3 class="font-serif text-xl font-bold text-brand-navy dark:text-white mb-3">
+                LGBTQ+ 友善
+              </h3>
+              <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                尊重每一種多元的愛與生命經驗，用開放、接納的態度陪伴你走過關係與生活中的大小事。
+              </p>
+            </div>
+          </div>
+
+          <!-- 技能 5 -->
+          <div class="bg-white dark:bg-slate-800/90 rounded-2xl p-6 sm:p-7 shadow-sm hover:shadow-md border border-slate-200/80 dark:border-slate-700 transition-all flex flex-col justify-between md:col-span-2 lg:col-span-1">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-brand-navy/10 dark:bg-sky-900/50 text-brand-navy dark:text-sky-300 flex items-center justify-center text-2xl mb-5">
+                🌱
+              </div>
+              <h3 class="font-serif text-xl font-bold text-brand-navy dark:text-white mb-3">
+                同志身份認同
+              </h3>
+              <p class="text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+                理解身份探索路上的掙扎與不易，陪你一起面對內在的自我接納與外在的環境壓力。
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 區塊三：正在學習 (雙欄探索看板 + 白底交錯) -->
+    <section id="learning" class="py-16 sm:py-24 bg-white/80 dark:bg-slate-900/60 border-t border-slate-200/60 dark:border-slate-800">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-12">
+          <span class="text-sm font-bold tracking-widest uppercase text-brand-accent dark:text-amber-400 block mb-2">CURRENTLY LEARNING</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-navy dark:text-white">
+            正在學習與探索的新領域
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- 學習項目 1：存在主義 -->
+          <div class="rounded-2xl overflow-hidden bg-brand-warmCard dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 flex flex-col">
+            <div class="h-48 overflow-hidden relative">
+              <img 
+                src="https://picsum.photos/seed/harley-existentialism-books/800/450" 
+                alt="存在主義哲學書籍與筆記" 
+                loading="lazy"
+                onerror="this.onerror=null; this.src='https://picsum.photos/seed/books-shelf/800/450';"
+                class="w-full h-full object-cover"
+              />
+              <span class="absolute top-4 left-4 px-3.5 py-1 rounded-full text-sm font-bold bg-brand-navy text-white shadow">
+                📖 最近在學
+              </span>
+            </div>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-2xl font-bold text-brand-navy dark:text-white mb-3">
+                  存在主義
+                </h3>
+                <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                  「人生的意義是由自己創造的……」這句話要能真正說得出口，也得先好好看看相關的書吧～最近正沉浸在存在主義的閱讀與思辨裡，把哲學養分轉化為諮商室裡的陪伴力量。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 學習項目 2：Vibe Coding -->
+          <div class="rounded-2xl overflow-hidden bg-brand-warmCard dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700 flex flex-col">
+            <div class="h-48 overflow-hidden relative">
+              <img 
+                src="https://picsum.photos/seed/harley-vibe-coding/800/450" 
+                alt="透過 AI 進行 Vibe Coding 與自動化實驗" 
+                loading="lazy"
+                onerror="this.onerror=null; this.src='https://picsum.photos/seed/laptop-coffee/800/450';"
+                class="w-full h-full object-cover"
+              />
+              <span class="absolute top-4 left-4 px-3.5 py-1 rounded-full text-sm font-bold bg-brand-accent text-white shadow">
+                🚀 接下來的目標
+              </span>
+            </div>
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-2xl font-bold text-brand-navy dark:text-white mb-3">
+                  Vibe Coding
+                </h3>
+                <p class="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+                  最近發現 Vibe Coding 似乎很有趣！延續平時喜歡透過 AI 學習寫程式、設計自動化流程的習慣，接下來打算好好探索這個新領域，看看能用它做出什麼好玩又實用的東西。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 區塊四：聯絡方式與行動呼籲 (滿版深藍色塊) -->
+    <section id="contact" class="py-20 sm:py-24 bg-brand-navy dark:bg-slate-950 text-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-white/10 text-sky-200 text-sm font-medium tracking-wider mb-4">
+          CONTACT & CONNECT
+        </span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mb-6">
+          期待在某個時刻，陪你一起走一段路
+        </h2>
+        <p class="text-base sm:text-xl text-slate-200 leading-relaxed max-w-2xl mx-auto mb-10">
+          無論是講座邀約、專案合作，或是想聊聊關於自我探索與諮商服務，都很歡迎與我聯繫！期待在某個時刻，能陪你一起走一段路。
+        </p>
+
+        <!-- 聯絡按鈕（依您的需求保留按鈕與圖標外觀，暫不綁定外部連結） -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button type="button" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-white text-brand-navy hover:bg-sky-50 font-bold text-base sm:text-lg shadow-lg transition-transform hover:-translate-y-0.5 cursor-pointer">
+            <svg class="w-6 h-6 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <span>寫信給我 / 預約服務</span>
+          </button>
+        </div>
+
+        <p class="mt-6 text-sm text-sky-200/80">
+          📍 所在地區：新竹市 ｜ 服務範圍：全台灣
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- 頁尾 -->
+  <footer class="bg-brand-navyDark dark:bg-black text-slate-300 py-8 border-t border-white/10">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div class="flex items-center gap-2.5">
+        <span class="w-7 h-7 rounded-full bg-white/15 text-white font-serif font-bold flex items-center justify-center text-sm">H</span>
+        <span class="font-serif font-semibold text-white">Harley Gao</span>
+        <span class="text-slate-400 text-sm">｜實習諮商心理師</span>
+      </div>
+      <p class="text-sm text-slate-400">
+        &copy; 2026 Harley Gao. 「活著回來就行，你真棒！」
+      </p>
+    </div>
+  </footer>
+
+  <!-- 互動功能 3：回到頂端按鈕 -->
+  <button id="back-to-top" type="button" aria-label="回到頂端" class="fixed bottom-6 right-6 z-40 p-3.5 rounded-full bg-brand-navy dark:bg-sky-600 text-white shadow-lg opacity-0 pointer-events-none translate-y-4 hover:bg-brand-navyLight dark:hover:bg-sky-500 transition-all duration-300">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"></path>
+    </svg>
+  </button>
+
+  <!-- JavaScript 互動控制（僅包含您勾選的深淺色切換、閱讀進度條、回到頂端，以及手機漢堡選單） -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. 深淺色模式切換
+      const htmlEl = document.documentElement;
+      const desktopToggle = document.getElementById('theme-toggle-desktop');
+      const mobileToggle = document.getElementById('theme-toggle-mobile');
+
+      // 檢查使用者先前的偏好或系統設定
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        htmlEl.classList.add('dark');
+      } else {
+        htmlEl.classList.remove('dark');
+      }
+
+      const toggleTheme = () => {
+        htmlEl.classList.toggle('dark');
+        if (htmlEl.classList.contains('dark')) {
+          localStorage.setItem('theme', 'dark');
+        } else {
+          localStorage.setItem('theme', 'light');
+        }
+      };
+
+      if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+      if (mobileToggle) mobileToggle.addEventListener('click', toggleTheme);
+
+      // 2. 手機版漢堡選單切換
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+          mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
+          mobileMenu.classList.toggle('hidden');
+        });
+
+        // 點擊選單連結後自動收合
+        mobileNavLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // 3. 閱讀進度條 & 回到頂端按鈕顯示控制
+      const progressBar = document.getElementById('reading-progress');
+      const backToTopBtn = document.getElementById('back-to-top');
+
+      const handleScroll = () => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        
+        // 更新閱讀進度條
+        if (progressBar && docHeight > 0) {
+          const scrollPercent = (scrollTop / docHeight) * 100;
+          progressBar.style.width = `${scrollPercent}%`;
+        }
+
+        // 控制回到頂端按鈕顯示與隱藏
+        if (backToTopBtn) {
+          if (scrollTop > 300) {
+            backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+            backToTopBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+          } else {
+            backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+            backToTopBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+          }
+        }
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+
+      // 點擊回到頂端平滑捲動
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
